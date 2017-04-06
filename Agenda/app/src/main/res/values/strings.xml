@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Contatinhos Ari</string>
+    <string name="action_settings">Settings</string>
+    <string name="nome">Nome</string>
+    <string name="email">E-mail</string>
+    <string name="telefone">Telefone</string>
+    <string name="salvar">Salvar</string>
+    <string name="salvarSucess0">Salvo com Sucesso</string>
+
+    <string name="salvo_sucesso">Salvo com sucesso!</string>
+    <string name="digite_seu_nome">Digite seu Nome</string>
+    <string name="digite_seu_email">Digite seu Email</string>
+    <string name="digite_seu_telefone">Digite seu Telefone</string>
+    <string name="nao_foi_possivel_salvar">Não foi possivel salvar</string>
+    <string name="salvo_com_sucesso">Salvo com sucesso</string>
+
+    <string name="ligar">Ligar</string>
+    <string name="enviar_email">Enviar email</string>
+    <string name="apagar">Apagar</string>
+
+
+    <string name="deseja_apagar">Deseja apagar</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+
+</resources>
