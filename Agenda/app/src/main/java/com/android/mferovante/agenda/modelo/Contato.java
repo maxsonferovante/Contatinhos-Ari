@@ -18,23 +18,23 @@ public class Contato implements Serializable {
     }
 
     private String nome;
-    private String email;
+    private String info;
     private String telefone;
 
     public Contato() {
         this.id = "0";
     }
 
-    public Contato(String id, String nome, String email, String telefone) {
+    public Contato(String id, String nome, String info, String telefone) {
         this.id = id;
         this.nome = nome;
-        this.email = email;
+        this.info = info;
         this.telefone = telefone;
     }
 
-    public Contato(String nome, String email, String telefone) {
+    public Contato(String nome, String info, String telefone) {
         this.nome = nome;
-        this.email = email;
+        this.info = info;
         this.telefone = telefone;
     }
 
@@ -47,12 +47,12 @@ public class Contato implements Serializable {
         this.nome = nome;
     }
 
-    public String getEmail() {
-        return email;
+    public String getInfo() {
+        return info;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setInfo(String email) {
+        this.info = info;
     }
 
     public String getTelefone() {

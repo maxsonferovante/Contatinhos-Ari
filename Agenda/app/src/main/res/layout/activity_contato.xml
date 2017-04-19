@@ -37,10 +37,10 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/contato_edtEmail"
+            android:id="@+id/contato_edtinfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email"
+            android:hint="@string/info"
             android:inputType=""
             tools:ignore="TextFields" />
 

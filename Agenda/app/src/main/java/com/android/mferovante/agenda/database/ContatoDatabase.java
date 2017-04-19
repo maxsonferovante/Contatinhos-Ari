@@ -54,7 +54,7 @@ public class ContatoDatabase {
                     new Contato(
                             Integer.toString(cursor.getInt(cursor.getColumnIndex("id"))),
                             cursor.getString(cursor.getColumnIndex("nome")),
-                            cursor.getString(cursor.getColumnIndex("email")),
+                            cursor.getString(cursor.getColumnIndex("info")),
                             cursor.getString(cursor.getColumnIndex("telefone"))
                     )
             );
@@ -88,7 +88,7 @@ public class ContatoDatabase {
     private ContentValues pegaDadosDoContato(Contato contato) {
         ContentValues dados = new ContentValues();
         dados.put("nome", contato.getNome());
-        dados.put("email", contato.getEmail());
+        dados.put("info", contato.getInfo());
         dados.put("telefone", contato.getTelefone());
         return dados;
     }

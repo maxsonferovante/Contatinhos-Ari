@@ -30,7 +30,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/list_email"
+        android:id="@+id/list_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/list_nome"
@@ -40,7 +40,7 @@
         android:id="@+id/list_telefone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/list_email"
+        android:layout_above="@+id/list_info"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="11dp"
         android:text="9965546465"
