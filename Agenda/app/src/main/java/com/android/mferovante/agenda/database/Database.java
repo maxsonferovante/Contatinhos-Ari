@@ -28,7 +28,7 @@ public class Database extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (newVersion>oldVersion){
             db.execSQL("CREAT TEMPORARY TABLE t1(n,i,t)");
-            db.execSQL("INSERT INTO t1 SELECT nome,email, telefone FROM Contato");
+            db.execSQL("INSERT INTO t1 SELECT nome,info, telefone FROM Contato");
             db.execSQL("DROP TABLE Contato");
             onCreate(db);
             db.execSQL("INSERT INTO Contato SELECT n,i,t FROM t1");

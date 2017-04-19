@@ -51,7 +51,7 @@ public class Contato implements Serializable {
         return info;
     }
 
-    public void setInfo(String email) {
+    public void setInfo(String info) {
         this.info = info;
     }
 

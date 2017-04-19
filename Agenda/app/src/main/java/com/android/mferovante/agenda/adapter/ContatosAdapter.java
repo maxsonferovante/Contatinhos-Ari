@@ -37,7 +37,7 @@ public class ContatosAdapter extends RecyclerView.Adapter<ContatosAdapter.MyView
         holder.textViewId.setText(contato.getId());
 
         holder.textViewNome.setText(contato.getNome());
-        holder.textViewEmail.setText(contato.getEmail());
+        holder.textViewinfo.setText(contato.getinfo());
         holder.textViewTelefone.setText(contato.getTelefone());
     }
 
@@ -47,13 +47,13 @@ public class ContatosAdapter extends RecyclerView.Adapter<ContatosAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewNome, textViewEmail, textViewTelefone, textViewId;
+        public TextView textViewNome, textViewinfo, textViewTelefone, textViewId;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             textViewId = (TextView) itemView.findViewById(R.id.list_id);
             textViewNome = (TextView) itemView.findViewById(R.id.list_nome);
-            textViewEmail = (TextView) itemView.findViewById(R.id.list_email);
+            textViewinfo = (TextView) itemView.findViewById(R.id.list_info);
             textViewTelefone = (TextView) itemView.findViewById(R.id.list_telefone);
         }
     }

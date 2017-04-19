@@ -32,12 +32,12 @@ import com.android.mferovante.agenda.modelo.Contato;
  */
 
 public class ContatoActivity extends AppCompatActivity {
-    private EditText contato_edtNome, contato_edtEmail, contato_edtTelefone;
+    private EditText contato_edtNome, contato_edtinfo, contato_edtTelefone;
     private TextView contato_textId;
     private Button contato_btnSalvar;
     private LinearLayout activity_contato;
     private ProgressBar contato_progressBar;
-    private String id, nome, email, telefone;
+    private String id, nome, info, telefone;
 
     private Contato contato;
     private ContatoDatabase contatoDatabase;
@@ -54,7 +54,7 @@ public class ContatoActivity extends AppCompatActivity {
         if (contato != null) {
             contato_textId.setText(contato.getId());
             contato_edtNome.setText(contato.getNome());
-            contato_edtEmail.setText(contato.getEmail());
+            contato_edtinfo.setText(contato.getInfo());
             contato_edtTelefone.setText(contato.getTelefone());
         } else {
             contato = new Contato();
@@ -70,8 +70,8 @@ public class ContatoActivity extends AppCompatActivity {
                     habilitarProgress(View.GONE, true);
                     return;
                 }
-                if (TextUtils.isEmpty(email)) {
-                    Snackbar.make(activity_contato, R.string.digite_seu_email, Snackbar.LENGTH_LONG).show();
+                if (TextUtils.isEmpty(info)) {
+                    Snackbar.make(activity_contato, R.string.digite_seu_info, Snackbar.LENGTH_LONG).show();
                     habilitarProgress(View.GONE, true);
                     return;
                 }
@@ -81,7 +81,7 @@ public class ContatoActivity extends AppCompatActivity {
                     return;
                 }
                 contato.setNome(nome);
-                contato.setEmail(email);
+                contato.setInfo(info);
                 contato.setTelefone(telefone);
                 //
                 contatoDatabase = new ContatoDatabase(getApplicationContext());
@@ -121,7 +121,7 @@ public class ContatoActivity extends AppCompatActivity {
     private void pegarValores() {
         id = contato_textId.getText().toString();
         nome = contato_edtNome.getText().toString();
-        email = contato_edtEmail.getText().toString();
+        info = contato_edtinfo.getText().toString();
         telefone = contato_edtTelefone.getText().toString();
     }
 
@@ -129,7 +129,7 @@ public class ContatoActivity extends AppCompatActivity {
         contato_textId = (TextView) findViewById(R.id.textViewId);
         contato_edtNome = (EditText) findViewById(R.id.contato_edtNome);
         contato_edtTelefone = (EditText) findViewById(R.id.contato_edtTelefone);
-        contato_edtEmail = (EditText) findViewById(R.id.contato_edtEmail);
+        contato_edtinfo = (EditText) findViewById(R.id.contato_edtinfo);
         contato_btnSalvar = (Button) findViewById(R.id.contato_btnSalvar);
         activity_contato = (LinearLayout) findViewById(R.id.activity_contato);
         contato_progressBar = (ProgressBar) findViewById(R.id.contato_progressBar);
