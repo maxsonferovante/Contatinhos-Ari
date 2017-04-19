@@ -4,9 +4,6 @@
         android:id="@+id/contato_ligar"
         android:title="@string/ligar" />
     <item
-        android:id="@+id/contato_email"
-        android:title="@string/enviar_email" />
-    <item
         android:id="@+id/contato_apagar"
         android:title="@string/apagar" />
 

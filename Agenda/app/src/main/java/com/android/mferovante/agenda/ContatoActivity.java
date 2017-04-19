@@ -161,12 +161,6 @@ public class ContatoActivity extends AppCompatActivity {
                     Log.i("PERMISSION", "FAIL");
                 }
                 return true;
-            case R.id.contato_email:
-                Intent send = new Intent(Intent.ACTION_SEND);
-                send.putExtra(Intent.EXTRA_EMAIL, new String[]{"" + contato.getEmail()});
-                send.setType("message/rfc822");
-                startActivity(send);
-                return true;
             case R.id.contato_apagar:
                 new AlertDialog.Builder(this)
                         .setMessage(R.string.deseja_apagar)
