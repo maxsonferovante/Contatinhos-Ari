@@ -37,7 +37,7 @@ public class ContatosAdapter extends RecyclerView.Adapter<ContatosAdapter.MyView
         holder.textViewId.setText(contato.getId());
 
         holder.textViewNome.setText(contato.getNome());
-        holder.textViewinfo.setText(contato.getinfo());
+        holder.textViewinfo.setText(contato.getInfo());
         holder.textViewTelefone.setText(contato.getTelefone());
     }
 

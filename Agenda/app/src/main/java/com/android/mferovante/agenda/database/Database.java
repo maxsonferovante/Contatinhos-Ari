@@ -27,14 +27,16 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (newVersion>oldVersion){
-            db.execSQL("CREAT TEMPORARY TABLE t1(n,i,t)");
-            db.execSQL("INSERT INTO t1 SELECT nome,info, telefone FROM Contato");
+            Log.i("ENTRANDO NO ONUPGRADE","------------------");
+            db.execSQL("CREATE TEMP TABLE t1(id INTEGER PRIMARY KEY, n TEXT,i TEXT,t TEXT)");
+            db.execSQL("INSERT INTO t1 SELECT id, nome,email, telefone FROM Contato");
             db.execSQL("DROP TABLE Contato");
             onCreate(db);
-            db.execSQL("INSERT INTO Contato SELECT n,i,t FROM t1");
+            db.execSQL("INSERT INTO Contato SELECT id, n,i,t FROM t1");
             db.execSQL("DROP TABLE t1");
             //db.execSQL("DROP TABLE IF EXISTS Contato;");
             //onCreate(db);
+            Log.i("SAIND NO ONUPGRADE","------------------");
         }
     }
 }
