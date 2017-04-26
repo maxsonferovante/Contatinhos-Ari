@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/fab_margin"
     android:paddingRight="@dimen/fab_margin">
 
+
     <TextView
         android:id="@+id/list_id"
         android:layout_width="wrap_content"

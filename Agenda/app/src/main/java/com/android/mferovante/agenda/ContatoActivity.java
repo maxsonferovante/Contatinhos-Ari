@@ -52,7 +52,6 @@ public class ContatoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         contato = (Contato) intent.getSerializableExtra("contato");
         if (contato != null) {
-            contato_textId.setText(contato.getId());
             contato_edtNome.setText(contato.getNome());
             contato_edtinfo.setText(contato.getInfo());
             contato_edtTelefone.setText(contato.getTelefone());
@@ -98,14 +97,12 @@ public class ContatoActivity extends AppCompatActivity {
     private void alterar() {
         contatoDatabase.alterar(contato);
         Toast.makeText(getApplicationContext(), R.string.salvo_com_sucesso, Toast.LENGTH_LONG).show();
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
     }
 
     private void inserir() {
         if (contatoDatabase.insere(contato) > 0) {
             Toast.makeText(getApplicationContext(), R.string.salvo_com_sucesso, Toast.LENGTH_LONG).show();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         } else {
             Snackbar.make(activity_contato, R.string.nao_foi_possivel_salvar, Snackbar.LENGTH_LONG).show();
@@ -119,14 +116,12 @@ public class ContatoActivity extends AppCompatActivity {
     }
 
     private void pegarValores() {
-        id = contato_textId.getText().toString();
         nome = contato_edtNome.getText().toString();
         info = contato_edtinfo.getText().toString();
         telefone = contato_edtTelefone.getText().toString();
     }
 
     private void findView() {
-        contato_textId = (TextView) findViewById(R.id.textViewId);
         contato_edtNome = (EditText) findViewById(R.id.contato_edtNome);
         contato_edtTelefone = (EditText) findViewById(R.id.contato_edtTelefone);
         contato_edtinfo = (EditText) findViewById(R.id.contato_edtinfo);
@@ -170,11 +165,11 @@ public class ContatoActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 contatoDatabase = new ContatoDatabase(getApplicationContext());
                                 contatoDatabase.deletar(contato);
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                 finish();
                             }
                         })
                         .setNegativeButton(R.string.nao, null).show();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -183,7 +178,6 @@ public class ContatoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
     }
 }

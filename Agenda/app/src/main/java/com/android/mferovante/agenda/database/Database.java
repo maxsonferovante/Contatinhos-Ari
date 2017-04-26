@@ -11,7 +11,8 @@ import android.util.Log;
 
 public class Database extends SQLiteOpenHelper {
     private static final String NOMEBANCO = "Agenda";
-    private static final int VERSAOBANCO = 2;
+    private static final int VERSAOBANCO = 3;
+    //my version 2
     private static final String TABLECONTATO = "CREATE TABLE Contato (id INTEGER PRIMARY KEY, " +
             "nome TEXT, info TEXT, telefone TEXT);";
 
