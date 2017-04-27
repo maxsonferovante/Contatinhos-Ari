@@ -1,11 +1,14 @@
 package com.android.mferovante.agenda;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
@@ -13,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.android.mferovante.agenda.adapter.ContatosAdapter;
@@ -22,7 +26,7 @@ import com.android.mferovante.agenda.modelo.Contato;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     private List<Contato> contatoList = new ArrayList<Contato>();
     private RecyclerView recyclerView;
     private ContatosAdapter contatosAdapter;
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(MainActivity.this, ContatoActivity.class),666);
+                startActivity(new Intent(MainActivity.this, ContatoActivity.class));
             }
         });
 
@@ -73,10 +77,33 @@ public class MainActivity extends AppCompatActivity {
                 new RecyclearTouchListener.ClickListener() {
                     @Override
                     public void onClick(View view, int position) {
-                        Contato contato = contatoList.get(position);
+                        /*Contato contato = contatoList.get(position);
                         Intent intent = new Intent(MainActivity.this, ContatoActivity.class);
                         intent.putExtra("contato", contato);
-                        startActivityForResult(intent,666);
+                        startActivity(intent);*/
+                        //Lista de itens
+                        ArrayList<String> itens = new ArrayList<String>();
+                        itens.add("Efetuar ligação");
+                        itens.add("Editação dos dados");
+                        itens.add("Excluir contato");
+                        itens.add("Matriculado");
+
+                        //adapter utilizando um layout customizado (TextView)
+                        ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, R.layout.support_simple_spinner_dropdown_item, itens);
+
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setTitle("Opções");
+
+                        //define o diálogo como uma lista, passa o adapter.
+                        builder.setSingleChoiceItems(adapter, 0, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                arg0.dismiss();
+                                onMenuItemClickAlertDialog(arg1);
+
+                            }
+                        });
+
+                        builder.create().show();
                     }
 
                     @Override
@@ -89,6 +116,23 @@ public class MainActivity extends AppCompatActivity {
                 }));
     }
 
+    public void onMenuItemClickAlertDialog(int position) {
+        switch (position) {
+            case 0:
+                Toast.makeText(this, "Ligar Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                Toast.makeText(this, "Editar Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                Toast.makeText(this, "Apagar Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+                Toast.makeText(this, "Matriculado Clicked", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -118,4 +162,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
     }
+
+
 }
