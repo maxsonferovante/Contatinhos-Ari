@@ -21,10 +21,7 @@
         android:id="@+id/list_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/list_id"
-        android:layout_marginTop="12dp"
-        android:ems="10"
         android:text="Maxson Ferovante"
         android:textColor="@color/nome"
         android:textSize="18dp"
@@ -41,9 +38,9 @@
         android:id="@+id/list_telefone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/list_info"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="11dp"
         android:text="9965546465"
-        android:textColor="@color/telefone" />
+        android:textColor="@color/telefone"
+        android:layout_above="@+id/list_info"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

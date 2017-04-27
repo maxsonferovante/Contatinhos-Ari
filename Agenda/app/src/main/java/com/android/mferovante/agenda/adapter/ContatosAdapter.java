@@ -1,6 +1,7 @@
 package com.android.mferovante.agenda.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class ContatosAdapter extends RecyclerView.Adapter<ContatosAdapter.MyView
         holder.textViewNome.setText(contato.getNome());
         holder.textViewinfo.setText(contato.getInfo());
         holder.textViewTelefone.setText(contato.getTelefone());
+
     }
 
     @Override
@@ -45,7 +47,8 @@ public class ContatosAdapter extends RecyclerView.Adapter<ContatosAdapter.MyView
         return contatosList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+    public class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView textViewNome, textViewinfo, textViewTelefone, textViewId;
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -53,6 +56,7 @@ public class ContatosAdapter extends RecyclerView.Adapter<ContatosAdapter.MyView
             textViewNome = (TextView) itemView.findViewById(R.id.list_nome);
             textViewinfo = (TextView) itemView.findViewById(R.id.list_info);
             textViewTelefone = (TextView) itemView.findViewById(R.id.list_telefone);
+
         }
     }
 }

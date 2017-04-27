@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -27,7 +30,7 @@ import android.widget.Toast;
 import com.android.mferovante.agenda.database.ContatoDatabase;
 import com.android.mferovante.agenda.modelo.Contato;
 
-/**
+/**s
  * Created by mferovante on 02/03/17.
  */
 
@@ -43,7 +46,7 @@ public class ContatoActivity extends AppCompatActivity {
     private ContatoDatabase contatoDatabase;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contato);
 
@@ -65,17 +68,17 @@ public class ContatoActivity extends AppCompatActivity {
                 pegarValores();
                 habilitarProgress(View.VISIBLE, false);
                 if (TextUtils.isEmpty(nome)) {
-                    Snackbar.make(activity_contato, R.string.digite_seu_nome, Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(activity_contato, R.string.digite_seu_nome, Snackbar.LENGTH_SHORT).show();
                     habilitarProgress(View.GONE, true);
                     return;
                 }
                 if (TextUtils.isEmpty(info)) {
-                    Snackbar.make(activity_contato, R.string.digite_seu_info, Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(activity_contato, R.string.digite_seu_info, Snackbar.LENGTH_SHORT).show();
                     habilitarProgress(View.GONE, true);
                     return;
                 }
                 if (TextUtils.isEmpty(telefone)) {
-                    Snackbar.make(activity_contato, R.string.digite_seu_telefone, Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(activity_contato, R.string.digite_seu_telefone, Snackbar.LENGTH_SHORT).show();
                     habilitarProgress(View.GONE, true);
                     return;
                 }
@@ -96,16 +99,16 @@ public class ContatoActivity extends AppCompatActivity {
 
     private void alterar() {
         contatoDatabase.alterar(contato);
-        Toast.makeText(getApplicationContext(), R.string.salvo_com_sucesso, Toast.LENGTH_LONG).show();
-        finish();
+        Toast.makeText(getApplicationContext(), R.string.salvo_com_sucesso, Toast.LENGTH_SHORT).show();
+        onBackPressed();
     }
 
     private void inserir() {
         if (contatoDatabase.insere(contato) > 0) {
-            Toast.makeText(getApplicationContext(), R.string.salvo_com_sucesso, Toast.LENGTH_LONG).show();
-            finish();
+            Toast.makeText(getApplicationContext(), R.string.salvo_com_sucesso, Toast.LENGTH_SHORT).show();
+            onBackPressed();
         } else {
-            Snackbar.make(activity_contato, R.string.nao_foi_possivel_salvar, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(activity_contato, R.string.nao_foi_possivel_salvar, Snackbar.LENGTH_SHORT).show();
             habilitarProgress(View.GONE, true);
         }
     }
@@ -131,53 +134,22 @@ public class ContatoActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (Integer.parseInt(contato.getId()) > 0) {
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_contato, menu);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.contato_ligar:
-                Intent call = new Intent(Intent.ACTION_CALL,
-                        Uri.parse("tel:" + contato.getTelefone()
-                        )
-                );
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
-                        == PackageManager.PERMISSION_GRANTED) {
-                    startActivity(call);
-                } else {
-                    Log.i("PERMISSION", "FAIL");
-                }
-                return true;
-            case R.id.contato_apagar:
-                new AlertDialog.Builder(this)
-                        .setMessage(R.string.deseja_apagar)
-                        .setCancelable(false)
-                        .setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                contatoDatabase = new ContatoDatabase(getApplicationContext());
-                                contatoDatabase.deletar(contato);
-                                finish();
-                            }
-                        })
-                        .setNegativeButton(R.string.nao, null).show();
-
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
     public void onBackPressed() {
-        finish();
+        /*Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        setResult(666,intent);
+        finish();*/
+        Intent upIntent = NavUtils.getParentActivityIntent(this);
+        if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+            //Se a atividade não faz parte do aplicativo, criamos uma nova tarefa
+            // para navegação com a pilha de volta sintetizada.
+            TaskStackBuilder.create(this)
+                    // Adiciona todas atividades parentes na pilha de volta
+                    .addNextIntentWithParentStack(upIntent)
+                    .startActivities();
+        } else {
+            //Se essa atividade faz parte da tarefa do app
+            //navegamos para seu parente logico.
+            NavUtils.navigateUpTo(this, upIntent);
+        }
     }
 }

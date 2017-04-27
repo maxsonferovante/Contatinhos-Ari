@@ -6,10 +6,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -21,7 +22,7 @@ import com.android.mferovante.agenda.modelo.Contato;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+public class MainActivity extends AppCompatActivity {
     private List<Contato> contatoList = new ArrayList<Contato>();
     private RecyclerView recyclerView;
     private ContatosAdapter contatosAdapter;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -40,16 +42,15 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ContatoActivity.class));
+                startActivityForResult(new Intent(MainActivity.this, ContatoActivity.class),666);
             }
         });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        recyclerView = (RecyclerView) findViewById(R.id.recycle_list_view);
 
         contatoDatabase = new ContatoDatabase(this);
 
@@ -57,11 +58,15 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         contatosAdapter = new ContatosAdapter(contatoList);
 
+        recyclerView = (RecyclerView) findViewById(R.id.recycle_list_view);
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
 
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(contatosAdapter);
+
 
         recyclerView.addOnItemTouchListener(new RecyclearTouchListener(getApplicationContext(),
                 recyclerView,
@@ -69,20 +74,17 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     @Override
                     public void onClick(View view, int position) {
                         Contato contato = contatoList.get(position);
-                        Intent intent = new Intent(getApplicationContext(), ContatoActivity.class);
+                        Intent intent = new Intent(MainActivity.this, ContatoActivity.class);
                         intent.putExtra("contato", contato);
-                        startActivity(intent);
+                        startActivityForResult(intent,666);
                     }
 
                     @Override
                     public void onLongClick(View view, int position) {
                         Contato contato = contatoList.get(position);
-                        //Toast.makeText(getApplicationContext(), contato.getTelefone(), Toast.LENGTH_LONG).show();
-                        PopupMenu popupMenu = new PopupMenu(MainActivity.this, view);
-                        popupMenu.setGravity(30);
-                        popupMenu.setOnMenuItemClickListener(MainActivity.this);
-                        popupMenu.inflate(R.menu.menu_long_click_contato);
-                        popupMenu.show();
+                        Toast.makeText(getApplicationContext(),
+                                "Novas funcionabilidades serão entreges futuramente!",
+                                Toast.LENGTH_SHORT).show();
                     }
                 }));
     }
@@ -93,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -111,18 +112,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_ligar:
-                Toast.makeText(this, "Ligar Clicked", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item_editar:
-                Toast.makeText(this, "Editar Clicked", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item_apagar:
-                Toast.makeText(this, "Apagar Clicked", Toast.LENGTH_SHORT).show();
-                return true;
-        }
-        return true;
+    public void onBackPressed() {
+        finish();
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
     }
 }
