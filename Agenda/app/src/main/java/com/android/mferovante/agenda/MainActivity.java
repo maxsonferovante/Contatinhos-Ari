@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity{
         mMaterialDialog.show();
     }
     private void callPhone(){
-        Intent call = new Intent(Intent.ACTION_CALL,
+        Intent call = new Intent(Intent.ACTION_DIAL,
                 Uri.parse("tel:" + aux.getTelefone()
                 )
         );
