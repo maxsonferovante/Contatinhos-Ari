@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -72,7 +71,7 @@ public class CanditatosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (this.rootView == null){
-            this.rootView = inflater.inflate(R.layout.content_main, container, false);
+            this.rootView = inflater.inflate(R.layout.canditatos_fragment, container, false);
             recyclerView = (RecyclerView) rootView.findViewById(R.id.recycle_list_view);
             setRecyclerView();
         }
