@@ -14,7 +14,7 @@
     tools:showIn="@layout/activity_main">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_list_view"
+        android:id="@+id/recycle_list_view_canditatos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

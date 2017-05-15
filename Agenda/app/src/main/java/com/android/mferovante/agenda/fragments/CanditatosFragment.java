@@ -55,15 +55,13 @@ public class CanditatosFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        contatoDatabase = new ContatoDatabase(getContext());
     }
 
     @Nullable
     @Override
     public void onResume(){
         super.onResume();
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycle_list_view);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycle_list_view_canditatos);
         setRecyclerView();
     }
 
@@ -72,7 +70,7 @@ public class CanditatosFragment extends Fragment {
                              Bundle savedInstanceState) {
         if (this.rootView == null){
             this.rootView = inflater.inflate(R.layout.canditatos_fragment, container, false);
-            recyclerView = (RecyclerView) rootView.findViewById(R.id.recycle_list_view);
+            recyclerView = (RecyclerView) rootView.findViewById(R.id.recycle_list_view_canditatos);
             setRecyclerView();
         }
         return rootView;
@@ -217,7 +215,10 @@ public class CanditatosFragment extends Fragment {
     }
 
     private void setRecyclerView() {
-        contatoList = contatoDatabase.buscaContatos();
+        contatoDatabase = new ContatoDatabase(getContext());
+
+        //Consultando todos os canditatos, por isso o args 0
+        contatoList = contatoDatabase.buscaContatos(0);
         contatosAdapter = new ContatosAdapter(contatoList);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());

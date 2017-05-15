@@ -39,10 +39,10 @@ public class ContatoDatabase {
         return inserir;
     }
 
-    public List<Contato> buscaContatos() {
+    public List<Contato> buscaContatos(int matriculado) {
         Cursor cursor;
         SQLiteDatabase db;
-        String sql = "SELECT * FROM " + NOMETABELA;
+        String sql = "SELECT * FROM " + NOMETABELA +" WHERE MATRICULADO == "+ Integer.toString(matriculado);
         List<Contato> contatos = new ArrayList<Contato>();
 
         database = new Database(context);
@@ -58,6 +58,7 @@ public class ContatoDatabase {
                             cursor.getString(cursor.getColumnIndex("telefone"))
                     )
             );
+            Log.i("TESTE AE",Integer.toString(cursor.getInt(cursor.getColumnIndex("matriculado"))));
         }
         cursor.close();
         db.close();
