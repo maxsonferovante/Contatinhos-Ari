@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.android.mferovante.agenda.fragments.AlunosFragment;
 import com.android.mferovante.agenda.fragments.CanditatosFragment;
 
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity{
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new CanditatosFragment(), "Canditatos");
+        adapter.addFragment(new AlunosFragment(), "Alunos");
         viewPager.setAdapter(adapter);
     }
 
@@ -102,10 +104,12 @@ public class MainActivity extends AppCompatActivity{
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
+
         @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);
         }
+
         @Override
         public int getCount() {
             return mFragmentList.size();
@@ -115,6 +119,7 @@ public class MainActivity extends AppCompatActivity{
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
+
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);

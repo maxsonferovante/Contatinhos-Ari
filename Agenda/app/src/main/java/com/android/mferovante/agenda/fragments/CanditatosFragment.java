@@ -163,7 +163,19 @@ public class CanditatosFragment extends Fragment {
                         .setNegativeButton(R.string.nao, null).show();
                 break;
             case 3:
-                Toast.makeText(getActivity(), "Matriculado Clicked", Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(getContext())
+                        .setMessage(R.string.deseja_alterar_para_matriculado)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                contatoDatabase = new ContatoDatabase(getContext());
+                                contato.setMatriculado(1);
+                                contatoDatabase.alterar(contato);
+                                setRecyclerView();
+                            }
+                        })
+                        .setNegativeButton(R.string.nao, null).show();
                 break;
         }
 
@@ -200,7 +212,6 @@ public class CanditatosFragment extends Fragment {
                 });
         mMaterialDialog.show();
     }
-
     private void callPhone(){
         Intent call = new Intent(Intent.ACTION_DIAL,
                 Uri.parse("tel:" + aux.getTelefone()

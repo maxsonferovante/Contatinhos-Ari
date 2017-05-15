@@ -55,10 +55,10 @@ public class ContatoDatabase {
                             Integer.toString(cursor.getInt(cursor.getColumnIndex("id"))),
                             cursor.getString(cursor.getColumnIndex("nome")),
                             cursor.getString(cursor.getColumnIndex("info")),
-                            cursor.getString(cursor.getColumnIndex("telefone"))
+                            cursor.getString(cursor.getColumnIndex("telefone")),
+                            cursor.getInt(cursor.getColumnIndex("matriculado"))
                     )
             );
-            Log.i("TESTE AE",Integer.toString(cursor.getInt(cursor.getColumnIndex("matriculado"))));
         }
         cursor.close();
         db.close();
@@ -91,6 +91,7 @@ public class ContatoDatabase {
         dados.put("nome", contato.getNome());
         dados.put("info", contato.getInfo());
         dados.put("telefone", contato.getTelefone());
+        dados.put("matriculado", contato.getMatriculado());
         return dados;
     }
 }

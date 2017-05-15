@@ -7,7 +7,19 @@ import java.io.Serializable;
  */
 
 public class Contato implements Serializable {
+    public Contato(String id, String nome, String info, String telefone, int matriculado) {
+        this.id = id;
+        this.nome = nome;
+        this.info = info;
+        this.telefone = telefone;
+        this.matriculado = matriculado;
+    }
+
     private String id;
+    private String nome;
+    private String info;
+    private String telefone;
+    private int matriculado;
 
     public String getId() {
         return id;
@@ -16,28 +28,6 @@ public class Contato implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-
-    private String nome;
-    private String info;
-    private String telefone;
-
-    public Contato() {
-        this.id = "0";
-    }
-
-    public Contato(String id, String nome, String info, String telefone) {
-        this.id = id;
-        this.nome = nome;
-        this.info = info;
-        this.telefone = telefone;
-    }
-
-    public Contato(String nome, String info, String telefone) {
-        this.nome = nome;
-        this.info = info;
-        this.telefone = telefone;
-    }
-
 
     public String getNome() {
         return nome;
@@ -62,5 +52,20 @@ public class Contato implements Serializable {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    public int getMatriculado() {
+        return matriculado;
+    }
+
+    public void setMatriculado(int matriculado) {
+        this.matriculado = matriculado;
+    }
+
+    public Contato() {
+        this.id = "0";
+        this.matriculado = 0;
+    }
+
+
 
 }
