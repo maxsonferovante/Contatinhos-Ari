@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,8 +16,13 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
+import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
+import com.ToxicBakery.viewpager.transforms.DepthPageTransformer;
 import com.ToxicBakery.viewpager.transforms.FlipHorizontalTransformer;
+import com.ToxicBakery.viewpager.transforms.ForegroundToBackgroundTransformer;
 import com.ToxicBakery.viewpager.transforms.ScaleInOutTransformer;
+import com.ToxicBakery.viewpager.transforms.StackTransformer;
+import com.ToxicBakery.viewpager.transforms.TabletTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.android.mferovante.agenda.fragments.AlunosFragment;
 import com.android.mferovante.agenda.fragments.CanditatosFragment;
@@ -100,11 +106,11 @@ public class MainActivity extends AppCompatActivity{
         adapter.addFragment(new AlunosFragment(), "Alunos");
 
         viewPager.setAdapter(adapter);
-        viewPager.setPageTransformer(true, new ScaleInOutTransformer());
+        viewPager.setPageTransformer(true, new DefaultTransformer());
     }
 
 
-    public  static class ViewPagerAdapter extends FragmentPagerAdapter {
+    public  static class ViewPagerAdapter extends FragmentStatePagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
