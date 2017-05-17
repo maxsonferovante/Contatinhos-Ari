@@ -38,4 +38,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'me.drakeet.materialdialog:library:1.2.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
 }

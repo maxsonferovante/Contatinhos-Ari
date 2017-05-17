@@ -178,7 +178,6 @@ public class CanditatosFragment extends Fragment {
                         .setNegativeButton(R.string.nao, null).show();
                 break;
         }
-
     }
 
     private  void callAccessPhone(){
