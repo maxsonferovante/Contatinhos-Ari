@@ -156,7 +156,7 @@ public class AlunosFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 contatoDatabase = new ContatoDatabase(getContext());
                                 contatoDatabase.deletar(contato);
-                                setRecyclerView();
+                                updateDataSet();
                             }
                         })
                         .setNegativeButton(R.string.nao, null).show();
@@ -210,7 +210,7 @@ public class AlunosFragment extends Fragment {
         }
     }
 
-    public void setRecyclerView() {
+    private void setRecyclerView() {
         contatoDatabase = new ContatoDatabase(getContext());
 
         //Consultando todos os alunos, por isso o args 1
@@ -222,6 +222,13 @@ public class AlunosFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(contatosAdapter);
+    }
+    public void updateDataSet(){
+        contatoDatabase = new ContatoDatabase(getContext());
+        contatoList = contatoDatabase.buscaContatos(1);
+
+        contatosAdapter = new ContatosAdapter(contatoList);
         recyclerView.setAdapter(contatosAdapter);
     }
 }

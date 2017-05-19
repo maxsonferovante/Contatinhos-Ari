@@ -8,21 +8,23 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-
+import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
+import com.ToxicBakery.viewpager.transforms.DepthPageTransformer;
 import com.android.mferovante.agenda.fragments.AlunosFragment;
 import com.android.mferovante.agenda.fragments.CanditatosFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_PERMISSIONS_CODE = 128;
     public static final String TAG = "LOG";
     private Toolbar toolbar;
@@ -44,8 +46,28 @@ public class MainActivity extends AppCompatActivity{
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
+        viewPager.setPageTransformer(true, new AccordionTransformer());
+
+        viewPager.addOnPageChangeListener(new OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Fragment fragment = adapter.getItem(1);
+                if (fragment instanceof AlunosFragment){
+                    ((AlunosFragment) fragment).updateDataSet();
+                }
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager,true);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -85,7 +107,12 @@ public class MainActivity extends AppCompatActivity{
     }
     @Override
     public void onBackPressed() {
-        finish();
+            if (viewPager.getCurrentItem() == 0){
+                super.onBackPressed();
+            }
+            else {
+                viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+            }
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -106,13 +133,14 @@ public class MainActivity extends AppCompatActivity{
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
+        private static int count = 2;
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
 
         }
         @Override
         public Fragment getItem(int position) {
-            return mFragmentList.get(position);
+           return mFragmentList.get(position);
         }
 
         @Override
@@ -129,7 +157,6 @@ public class MainActivity extends AppCompatActivity{
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
-
 
     }
 

@@ -157,7 +157,7 @@ public class CanditatosFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 contatoDatabase = new ContatoDatabase(getContext());
                                 contatoDatabase.deletar(contato);
-                                setRecyclerView();
+                                updateDataSet();
                             }
                         })
                         .setNegativeButton(R.string.nao, null).show();
@@ -172,7 +172,7 @@ public class CanditatosFragment extends Fragment {
                                 contatoDatabase = new ContatoDatabase(getContext());
                                 contato.setMatriculado(1);
                                 contatoDatabase.alterar(contato);
-                                setRecyclerView();
+                                updateDataSet();
                             }
                         })
                         .setNegativeButton(R.string.nao, null).show();
@@ -223,7 +223,6 @@ public class CanditatosFragment extends Fragment {
             startActivity(call);
         }
     }
-
     private void setRecyclerView() {
         contatoDatabase = new ContatoDatabase(getContext());
 
@@ -236,6 +235,14 @@ public class CanditatosFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(contatosAdapter);
+    }
+
+    public void updateDataSet(){
+        contatoDatabase = new ContatoDatabase(getContext());
+        contatoList = contatoDatabase.buscaContatos(0);
+
+        contatosAdapter = new ContatosAdapter(contatoList);
         recyclerView.setAdapter(contatosAdapter);
     }
 }
