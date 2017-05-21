@@ -44,7 +44,8 @@
             android:id="@+id/contato_edtTelefone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/telefone" />
+            android:hint="@string/telefone"
+            android:phoneNumber="true" />
 
     </android.support.design.widget.TextInputLayout>
 

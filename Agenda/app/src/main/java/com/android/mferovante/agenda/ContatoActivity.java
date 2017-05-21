@@ -36,11 +36,10 @@ import com.android.mferovante.agenda.modelo.Contato;
 
 public class ContatoActivity extends AppCompatActivity {
     private EditText contato_edtNome, contato_edtinfo, contato_edtTelefone;
-    private TextView contato_textId;
     private Button contato_btnSalvar;
     private LinearLayout activity_contato;
     private ProgressBar contato_progressBar;
-    private String id, nome, info, telefone;
+    private String nome, info, telefone;
 
     private Contato contato;
     private ContatoDatabase contatoDatabase;
@@ -135,9 +134,6 @@ public class ContatoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        /*Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-        setResult(666,intent);
-        finish();*/
         Intent upIntent = NavUtils.getParentActivityIntent(this);
         if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
             //Se a atividade não faz parte do aplicativo, criamos uma nova tarefa
