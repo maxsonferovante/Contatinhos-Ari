@@ -21,6 +21,13 @@ public class Contato implements Serializable {
     private String telefone;
     private int matriculado;
 
+    public Contato(String s, String s1, String s2, int i) {
+        this.nome = s;
+        this.info = s1;
+        this.telefone = s2;
+        this.matriculado = i;
+    }
+
     public String getId() {
         return id;
     }

@@ -17,6 +17,7 @@ import android.view.View;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
+import com.android.mferovante.agenda.creative.CreatorCandidatos;
 import com.android.mferovante.agenda.fragments.AlunosFragment;
 import com.android.mferovante.agenda.fragments.CanditatosFragment;
 
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        CreatorCandidatos creatorCandidatos = new CreatorCandidatos(getApplicationContext());
+        creatorCandidatos.creation();
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);

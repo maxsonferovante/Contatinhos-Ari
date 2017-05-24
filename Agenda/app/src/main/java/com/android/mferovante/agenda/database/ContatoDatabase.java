@@ -3,6 +3,7 @@ package com.android.mferovante.agenda.database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -25,6 +26,11 @@ public class ContatoDatabase {
         this.context = context;
     }
 
+    public long quantItem() {
+
+        return DatabaseUtils.queryNumEntries(new Database(context).getReadableDatabase(), NOMETABELA);
+
+    }
     public long insere(Contato contato) {
         database = new Database(context);
 
@@ -36,6 +42,21 @@ public class ContatoDatabase {
         db.close();
 
         Log.i(NOMETABELA, inserir + "");
+        return inserir;
+    }
+    public long insertList(List<Contato> list){
+        database = new Database(context);
+        SQLiteDatabase db = database.getWritableDatabase();
+        ContentValues dados = null;
+        long inserir = 0;
+
+        for (Contato c : list){
+            dados = pegaDadosDoContato(c);
+            inserir = db.insert(NOMETABELA,null,dados);
+        }
+
+        db.close();
+
         return inserir;
     }
 
