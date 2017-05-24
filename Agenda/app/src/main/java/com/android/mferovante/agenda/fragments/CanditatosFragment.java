@@ -21,8 +21,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.android.mferovante.agenda.ContatoActivity;
-import com.android.mferovante.agenda.MainActivity;
+import com.android.mferovante.agenda.activity.ContatoActivity;
+import com.android.mferovante.agenda.activity.MainActivity;
 import com.android.mferovante.agenda.R;
 import com.android.mferovante.agenda.RecyclearTouchListener;
 import com.android.mferovante.agenda.adapter.ContatosAdapter;
