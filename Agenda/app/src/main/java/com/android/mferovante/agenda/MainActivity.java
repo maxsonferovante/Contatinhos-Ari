@@ -17,7 +17,6 @@ import android.view.View;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
-import com.ToxicBakery.viewpager.transforms.DepthPageTransformer;
 import com.android.mferovante.agenda.fragments.AlunosFragment;
 import com.android.mferovante.agenda.fragments.CanditatosFragment;
 
@@ -27,6 +26,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_PERMISSIONS_CODE = 128;
     public static final String TAG = "LOG";
+    private FloatingActionButton fab;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager,true);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

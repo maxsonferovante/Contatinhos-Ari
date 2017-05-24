@@ -61,8 +61,6 @@ public class CanditatosFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycle_list_view_canditatos);
-        setRecyclerView();
     }
 
     @Override
@@ -157,7 +155,11 @@ public class CanditatosFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 contatoDatabase = new ContatoDatabase(getContext());
                                 contatoDatabase.deletar(contato);
-                                updateDataSet();
+
+                                contatoList.remove(positionContact);
+                                contatosAdapter.notifyItemRemoved(positionContact);
+                                contatosAdapter.notifyItemRangeChanged(positionContact,contatoList.size());
+
                             }
                         })
                         .setNegativeButton(R.string.nao, null).show();
@@ -172,7 +174,10 @@ public class CanditatosFragment extends Fragment {
                                 contatoDatabase = new ContatoDatabase(getContext());
                                 contato.setMatriculado(1);
                                 contatoDatabase.alterar(contato);
-                                updateDataSet();
+
+                                contatoList.remove(positionContact);
+                                contatosAdapter.notifyItemRemoved(positionContact);
+                                contatosAdapter.notifyItemRangeChanged(positionContact,contatoList.size());
                             }
                         })
                         .setNegativeButton(R.string.nao, null).show();
@@ -235,14 +240,6 @@ public class CanditatosFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(contatosAdapter);
-    }
-
-    public void updateDataSet(){
-        contatoDatabase = new ContatoDatabase(getContext());
-        contatoList = contatoDatabase.buscaContatos(0);
-
-        contatosAdapter = new ContatosAdapter(contatoList);
         recyclerView.setAdapter(contatosAdapter);
     }
 }

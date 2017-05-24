@@ -61,8 +61,6 @@ public class AlunosFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycle_list_view_alunos);
-        setRecyclerView();
     }
 
     @Override
@@ -156,7 +154,10 @@ public class AlunosFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 contatoDatabase = new ContatoDatabase(getContext());
                                 contatoDatabase.deletar(contato);
-                                updateDataSet();
+
+                                contatoList.remove(positionContact);
+                                contatosAdapter.notifyItemRemoved(positionContact);
+                                contatosAdapter.notifyItemRangeChanged(positionContact,contatoList.size());
                             }
                         })
                         .setNegativeButton(R.string.nao, null).show();
