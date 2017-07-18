@@ -16,7 +16,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         //CreatorCandidatos creatorCandidatos = new CreatorCandidatos(getApplicationContext());
-        //creatorCandidatos.creation(200);
+        //creatorCandidatos.creation(50);
         Handler handle = new Handler();
 
         handle.postDelayed(new Runnable() {
