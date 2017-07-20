@@ -45,7 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/telefone"
-            android:phoneNumber="true" />
+            android:phoneNumber="true"
+            android:maxLines="1" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -59,10 +60,10 @@
         android:textColor="@android:color/background_light" />
 
     <ProgressBar
-        android:visibility="gone"
         android:id="@+id/contato_progressBar"
-        style="?android:attr/progressBarStyleLarge"
+        style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
 </LinearLayout>

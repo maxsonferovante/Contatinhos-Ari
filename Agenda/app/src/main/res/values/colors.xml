@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#b950e9</color>
-    <color name="colorPrimaryDark">#a129ec</color>
-    <color name="colorAccent">#951bc9</color>
+    8dc6c6
+    <color name="colorPrimary">#5f749c</color>
+    <color name="colorPrimaryDark">#333f55</color>
+    <color name="colorAccent">#b4b4b4</color>
 
-    <color name="nome">#999999</color>
-    <color name="telefone">#222222</color>
+    <color name="nome">#a6b7b7</color>
+    <color name="telefone">#9f7338</color>
 </resources>
